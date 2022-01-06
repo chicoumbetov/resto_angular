@@ -1,7 +1,9 @@
 const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
+// const cors = require("cors");
+// const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
+const userRoutes = require('./routes/user');
+
 const app = express();
 
 require('dotenv').config()
@@ -30,13 +32,12 @@ app.use((req, res, next) => {
 // app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 
 // import postRoutes from './routes/posts.js'
-// import userRoutes from './routes/users.js'
+// import userRoutes from './routes/user.js'
 // app.use('/posts', postRoutes);
-// app.use('/user', userRoutes)
+app.use('/user', userRoutes);
 
 app.get('/', (req, res) => {
-    res.send('Hello to wedding API')
+    res.send('Hello to restaurant angular API')
 })
-
 
 module.exports = app;
