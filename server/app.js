@@ -1,6 +1,6 @@
 const express = require("express");
-// const cors = require("cors");
-// const bodyParser = require("body-parser");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user');
 
@@ -28,13 +28,15 @@ app.use((req, res, next) => {
     next();
 });
 
-// app.use(bodyParser.json({ limit: "30mb", extended: true}))
-// app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
+app.use(cors());
+
+app.use(bodyParser.json({ limit: "30mb", extended: true}))
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 
 // import postRoutes from './routes/posts.js'
 // import userRoutes from './routes/user.js'
 // app.use('/posts', postRoutes);
-app.use('/user', userRoutes);
+app.use('/api/auth/', userRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello to restaurant angular API')
