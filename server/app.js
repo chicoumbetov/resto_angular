@@ -39,7 +39,6 @@ app.use(bodyParser.json({ limit: "30mb", extended: true}))
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
-
 app.use('/api/sauces', sauceRoutes);
 
 app.use('/api/auth/', userRoutes);

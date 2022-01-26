@@ -27,9 +27,21 @@ exports.createSauce = (req, res, next) => {
 };
 
 // exports.reactToSauce id in userLiked array
-// exports.modifySauce if image modifier esle . updateOne(_id: req.params.id)
-// exports.deleteSauce deleteOne(_id: req.params.id)
+exports.reactToSauce = () => {
 
+}
+// exports.modifySauce if image modifier esle . updateOne(_id: req.params.id)
+exports.modifySauce = (req, res, next) => {
+    console.log("modify sauce", req.params.id)
+    Sauce.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id }).then(sauce => res.status(200).json(sauce)) // Récupère toutes les sauces
+        .catch(error => res.status(400).json({ error }));
+}
+// exports.deleteSauce deleteOne(_id: req.params.id)
+exports.deleteSauce = (req, res, next) => {
+    console.log("delete sauce", req.params.id)
+    Sauce.deleteOne({ _id: req.params.id }).then(sauce => res.status(200).json(sauce)) // Récupère toutes les sauces
+        .catch(error => res.status(400).json({ error }));
+}
 
 // deletion of images :
 // fs.unlink(`images/${filename}`, () => { // On supprime l'image du serveur
