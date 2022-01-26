@@ -2,7 +2,12 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
+
+// libraries de gestion fichiers
+const path = require('path');
+
 const userRoutes = require('./routes/user');
+const sauceRoutes = require('./routes/sauce');
 
 const app = express();
 
@@ -33,9 +38,10 @@ app.use(cors());
 app.use(bodyParser.json({ limit: "30mb", extended: true}))
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 
-// import postRoutes from './routes/posts.js'
-// import userRoutes from './routes/user.js'
-// app.use('/posts', postRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
+app.use('/api/sauces', sauceRoutes);
+
 app.use('/api/auth/', userRoutes);
 
 app.get('/', (req, res) => {
